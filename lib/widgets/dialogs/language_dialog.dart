@@ -21,7 +21,7 @@ class LanguageDialog extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           ListTile(
-            title: const Text("English"),
+            title: Text(AppLocalizations.of(context)!.english),
             onTap: () {
               onLanguageSelected("en");
               Navigator.of(context).pop();
@@ -29,7 +29,7 @@ class LanguageDialog extends StatelessWidget {
           ),
           const Divider(height: 1),
           ListTile(
-            title: const Text("日本語"),
+            title: Text(AppLocalizations.of(context)!.japanese),
             onTap: () {
               onLanguageSelected("ja");
               Navigator.of(context).pop();

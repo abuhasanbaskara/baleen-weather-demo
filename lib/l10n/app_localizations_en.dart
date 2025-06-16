@@ -9,9 +9,6 @@ class AppLocalizationsEn extends AppLocalizations {
   AppLocalizationsEn([String locale = 'en']) : super(locale);
 
   @override
-  String get appTitle => 'Weather App';
-
-  @override
   String get settings => 'Settings';
 
   @override
@@ -25,4 +22,16 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get dark => 'Dark';
+
+  @override
+  String get search => 'Search...';
+
+  @override
+  String get fiveDayForecast => '5-DAY FORECAST';
+
+  @override
+  String get english => 'English';
+
+  @override
+  String get japanese => 'Japanese';
 }

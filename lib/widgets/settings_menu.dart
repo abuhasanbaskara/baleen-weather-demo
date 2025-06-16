@@ -1,4 +1,5 @@
 import 'package:adaptive_theme/adaptive_theme.dart';
+import 'package:baleen_weather_app_test/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 
 class SettingsMenu extends StatelessWidget {
@@ -30,11 +31,11 @@ class SettingsMenu extends StatelessWidget {
         children: [
           _buildListTile(
             context,
-            title: 'Theme',
+            title: AppLocalizations.of(context)!.theme,
             trailing: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                const Text('Light'),
+                Text(AppLocalizations.of(context)!.light),
                 const SizedBox(width: 10),
                 Switch(
                   value: isDark,
@@ -47,14 +48,14 @@ class SettingsMenu extends StatelessWidget {
                   },
                 ),
                 const SizedBox(width: 10),
-                const Text('Dark'),
+                Text(AppLocalizations.of(context)!.dark),
               ],
             ),
           ),
           const Divider(height: 1),
           _buildListTile(
             context,
-            title: 'Change Language',
+            title: AppLocalizations.of(context)!.changeLanguage,
             onTap: onChangeLanguageTap,
           ),
         ],

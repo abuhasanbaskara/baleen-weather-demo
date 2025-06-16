@@ -1,9 +1,12 @@
 {
   "@@locale": "ja",
-  "appTitle": "天気アプリ",
   "settings": "設定",
   "changeLanguage": "言語を変更する",
   "theme": "テーマ",
   "light": "ライト",
-  "dark": "ダーク"
+  "dark": "ダーク",
+  "search": "検索...",
+  "fiveDayForecast": "5日間の天気予報",
+  "english": "英語",
+  "japanese": "日本語"
 }

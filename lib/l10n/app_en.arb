@@ -1,9 +1,12 @@
 {
   "@@locale": "en",
-  "appTitle": "Weather App",
   "settings": "Settings",
   "changeLanguage": "Change Language",
   "theme": "Theme",
   "light": "Light",
-  "dark": "Dark"
+  "dark": "Dark",
+  "search": "Search...",
+  "fiveDayForecast": "5-DAY FORECAST",
+  "english": "English",
+  "japanese": "Japanese"
 }

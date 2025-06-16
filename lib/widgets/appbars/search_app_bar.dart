@@ -1,3 +1,4 @@
+import 'package:baleen_weather_app_test/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 
 class SearchAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -37,7 +38,7 @@ class SearchAppBar extends StatelessWidget implements PreferredSizeWidget {
                 controller: controller,
                 onSubmitted: (_) => _triggerSearch(),
                 decoration: InputDecoration(
-                  hintText: 'Search...',
+                  hintText: AppLocalizations.of(context)!.search,
                   contentPadding:
                   const EdgeInsets.symmetric(vertical: 10.0, horizontal: 16.0),
                   filled: true,

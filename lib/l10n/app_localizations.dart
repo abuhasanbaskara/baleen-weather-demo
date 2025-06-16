@@ -95,12 +95,6 @@ abstract class AppLocalizations {
     Locale('ja')
   ];
 
-  /// No description provided for @appTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Weather App'**
-  String get appTitle;
-
   /// No description provided for @settings.
   ///
   /// In en, this message translates to:
@@ -130,6 +124,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Dark'**
   String get dark;
+
+  /// No description provided for @search.
+  ///
+  /// In en, this message translates to:
+  /// **'Search...'**
+  String get search;
+
+  /// No description provided for @fiveDayForecast.
+  ///
+  /// In en, this message translates to:
+  /// **'5-DAY FORECAST'**
+  String get fiveDayForecast;
+
+  /// No description provided for @english.
+  ///
+  /// In en, this message translates to:
+  /// **'English'**
+  String get english;
+
+  /// No description provided for @japanese.
+  ///
+  /// In en, this message translates to:
+  /// **'Japanese'**
+  String get japanese;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
