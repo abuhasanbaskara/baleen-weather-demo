@@ -1,0 +1,9 @@
+{
+  "@@locale": "en",
+  "appTitle": "Weather App",
+  "settings": "Settings",
+  "changeLanguage": "Change Language",
+  "theme": "Theme",
+  "light": "Light",
+  "dark": "Dark"
+}

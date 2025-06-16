@@ -1,0 +1,9 @@
+{
+  "@@locale": "ja",
+  "appTitle": "天気アプリ",
+  "settings": "設定",
+  "changeLanguage": "言語を変更する",
+  "theme": "テーマ",
+  "light": "ライト",
+  "dark": "ダーク"
+}
