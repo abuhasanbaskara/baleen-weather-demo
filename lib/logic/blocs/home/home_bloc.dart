@@ -3,6 +3,7 @@ import 'package:baleen_weather_app_test/data/repositories/location_repository.da
 import 'package:baleen_weather_app_test/data/repositories/weather_repository.dart';
 import 'package:baleen_weather_app_test/logic/blocs/home/home_event.dart';
 import 'package:baleen_weather_app_test/logic/blocs/home/home_state.dart';
+import 'package:baleen_weather_app_test/widgets/network_util.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:logger/logger.dart';
 
@@ -40,11 +41,20 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       errorWeatherResponse: null,
     ));
 
+    final hasConnection = await NetworkUtil.hasConnection();
+    if (!hasConnection) {
+      emit(state.copyWith(
+        isWeatherResponseLoading: false,
+        errorWeatherResponse: "No internet connection",
+        isCityNotFound: true,
+      ));
+      return;
+    }
+
     try {
       final response = await weatherRepository.getWeatherByCityName(event.cityName);
 
       if (response.cod == "200") {
-
         if (response.city?.name != null) {
           hiveRepository.saveWeatherResponse(response.city!.name!, response);
           add(CallSavedWeather());
@@ -101,6 +111,16 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       isWeatherResponseLoading: true,
       errorWeatherResponse: null,
     ));
+
+    final hasConnection = await NetworkUtil.hasConnection();
+    if (!hasConnection) {
+      emit(state.copyWith(
+        isWeatherResponseLoading: false,
+        errorWeatherResponse: "No internet connection",
+        isCityNotFound: true,
+      ));
+      return;
+    }
 
     try {
       final response = await weatherRepository.getWeatherByLatLon(event.lat, event.lon);
@@ -178,6 +198,16 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       isWeatherResponseLoading: true,
       errorWeatherResponse: null,
     ));
+
+    final hasConnection = await NetworkUtil.hasConnection();
+    if (!hasConnection) {
+      emit(state.copyWith(
+        isWeatherResponseLoading: false,
+        errorWeatherResponse: "No internet connection",
+        isCityNotFound: true,
+      ));
+      return;
+    }
 
     try {
       final response = await weatherRepository.getWeatherByCityName(event.savedWeatherResponse.city?.name ?? "");

@@ -8,8 +8,10 @@ class ErrorMessageUtil {
         return 'City Not Found';
       case '500':
         return 'Internal Server Error';
+      case 'No internet connection':
+        return 'No internet connection';
       default:
-        return 'Something went wrong. Please try again.';
+        return 'Something went wrong';
     }
   }
 
@@ -21,8 +23,10 @@ class ErrorMessageUtil {
         return 'Try using a simpler city name (ex: Tokyo)';
       case '500':
         return 'Please try again later.';
+      case 'No internet connection':
+        return 'Please check your internet connection';
       default:
-        return 'Something went wrong. Please try again.';
+        return 'Please try again.';
     }
   }
 }

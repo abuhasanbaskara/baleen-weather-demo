@@ -65,6 +65,13 @@ class HomePage extends StatelessWidget {
               Scaffold(
                 appBar: _buildAppBar(context, state),
                 body: _buildBody(context, state),
+                floatingActionButton: FloatingActionButton(
+                  onPressed: () {
+                    context.read<HomeBloc>().add(GetCurrentLocation());
+                  },
+                  tooltip: 'Get Current Location',
+                  child: const Icon(Icons.my_location),
+                ),
               ),
               if (state.isWeatherResponseLoading) const FullScreenLoading(),
             ],
@@ -96,7 +103,7 @@ class HomePage extends StatelessWidget {
     return SingleChildScrollView(
       child: Container(
         width: double.infinity,
-        margin: const EdgeInsets.only(right: 16, left: 16, bottom: 30),
+        margin: const EdgeInsets.only(right: 16, left: 16, bottom: 40),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
