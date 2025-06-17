@@ -28,6 +28,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     on<CallSavedWeather>(_callSavedWeather);
     on<ShowSelectedSavedWeather>(_showSelectedSavedWeather);
     on<DeleteSavedWeather>(_deleteSavedWeather);
+    on<RefreshSavedWeather>(_refreshSavedWeather);
   }
 
   Future<void> _getWeatherByCityName(
@@ -46,6 +47,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
         if (response.city?.name != null) {
           hiveRepository.saveWeatherResponse(response.city!.name!, response);
+          add(CallSavedWeather());
         }
 
         emit(state.copyWith(
@@ -106,6 +108,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
       if (response.cod == "200") {
         hiveRepository.saveWeatherResponse("currentLocation", updated);
+        add(CallSavedWeather());
 
         emit(state.copyWith(
           weatherResponse: updated,
@@ -167,4 +170,37 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     }
   }
 
+  Future<void> _refreshSavedWeather(
+      RefreshSavedWeather event,
+      Emitter<HomeState> emit,
+      ) async {
+    emit(state.copyWith(
+      isWeatherResponseLoading: true,
+      errorWeatherResponse: null,
+    ));
+
+    try {
+      final response = await weatherRepository.getWeatherByCityName(event.savedWeatherResponse.city?.name ?? "");
+
+      if (response.cod == "200") {
+
+        if (event.savedWeatherResponse.isCurrentLocation) {
+          final updated = response.copyWith(isCurrentLocation: true);
+          hiveRepository.saveWeatherResponse("currentLocation", updated);
+        } else if (response.city?.name != null){
+          hiveRepository.saveWeatherResponse(response.city!.name!, response);
+        }
+
+        add(CallSavedWeather());
+        emit(state.copyWith(
+          isWeatherResponseLoading: false,
+        ));
+      }
+    } catch (e) {
+      emit(state.copyWith(
+        isWeatherResponseLoading: false,
+        isCityNotFound: true,
+      ));
+    }
+  }
 }

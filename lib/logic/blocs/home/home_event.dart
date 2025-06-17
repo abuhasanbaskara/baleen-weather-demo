@@ -80,3 +80,12 @@ class DeleteSavedWeather extends HomeEvent {
   @override
   List<Object> get props => [savedWeatherResponse];
 }
+
+class RefreshSavedWeather extends HomeEvent {
+  final WeatherResponse savedWeatherResponse;
+
+  RefreshSavedWeather({required this.savedWeatherResponse});
+
+  @override
+  List<Object> get props => [savedWeatherResponse];
+}

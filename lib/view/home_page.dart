@@ -130,7 +130,7 @@ class HomePage extends StatelessWidget {
         context.read<HomeBloc>().add(ShowSelectedSavedWeather(savedWeatherResponse: item));
       },
       onReloadItem: (item) {
-        print("Reload");
+        context.read<HomeBloc>().add(RefreshSavedWeather(savedWeatherResponse: item));
       },
       onDeleteItem: (item) {
         context.read<HomeBloc>().add(DeleteSavedWeather(savedWeatherResponse: item));
