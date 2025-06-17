@@ -33,16 +33,11 @@ class _SearchAppBarState extends State<SearchAppBar> {
     _focusNode = FocusNode();
 
     _focusNode.addListener(() {
-      setState(() {}); // Rebuild to update close button
-      if (_focusNode.hasFocus) {
-        widget.onSearchFocus?.call();
-      } else {
-        widget.onSearchUnfocus?.call();
-      }
+      setState(() {}); // Rebuild to show/hide close icon
     });
 
     widget.controller.addListener(() {
-      setState(() {}); // Rebuild to update close button on text change
+      setState(() {}); // Rebuild when text changes
     });
   }
 
@@ -73,6 +68,9 @@ class _SearchAppBarState extends State<SearchAppBar> {
               child: TextField(
                 focusNode: _focusNode,
                 controller: widget.controller,
+                onTap: () {
+                  widget.onSearchFocus?.call();
+                },
                 onSubmitted: (_) => _triggerSearch(),
                 decoration: InputDecoration(
                   hintText: AppLocalizations.of(context)!.search,
@@ -129,4 +127,3 @@ class _SearchAppBarState extends State<SearchAppBar> {
     );
   }
 }
-

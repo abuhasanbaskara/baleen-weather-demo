@@ -86,6 +86,7 @@ class HomePage extends StatelessWidget {
       controller: _searchController,
       onSearchChanged: (searchText) {
         context.read<HomeBloc>().add(GetWeatherByCityName(cityName: searchText));
+        context.read<HomeBloc>().add(SearchUnFocus());
       },
       onSettingsTap: (){
         context.push('/setting');
