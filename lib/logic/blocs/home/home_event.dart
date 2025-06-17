@@ -15,7 +15,21 @@ class GetWeatherByCityName extends HomeEvent {
 }
 
 class ConfirmedCityNotFound extends HomeEvent {
+  @override
+  List<Object> get props => [];
+}
 
+class GetCurrentLocation extends HomeEvent {
+  @override
+  List<Object> get props => [];
+}
+
+class ShowLocationErrorDialogDone extends HomeEvent {
+  @override
+  List<Object> get props => [];
+}
+
+class GetCurrentLocationDone extends HomeEvent {
   @override
   List<Object> get props => [];
 }

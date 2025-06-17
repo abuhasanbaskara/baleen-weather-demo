@@ -56,11 +56,6 @@ dependencies:
   # Cached Image
   cached_network_image: ^3.4.1
 
-  # Utils
-  logger: ^1.1.0
-  lottie: ^3.3.1
-  intl: ^0.20.2
-
   # Native Splash
   flutter_native_splash: ^2.4.6
 
@@ -69,6 +64,15 @@ dependencies:
 
   #Shared Pref
   shared_preferences: ^2.5.3
+
+  #Geolocator for GPS
+  geolocator: ^10.0.0
+
+  # Utils
+  logger: ^1.1.0
+  lottie: ^3.3.1
+  intl: ^0.20.2
+  app_settings: ^5.1.1
 
 dev_dependencies:
   flutter_test:
@@ -93,6 +97,7 @@ flutter:
   assets:
      - assets/
      - assets/commons/
+     - assets/icons/
      - assets/weathers/
 
   # An image asset can refer to one or more resolution-specific "variants", see

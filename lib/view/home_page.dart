@@ -1,3 +1,4 @@
+import 'package:app_settings/app_settings.dart';
 import 'package:baleen_weather_app_test/logic/blocs/home/home_bloc.dart';
 import 'package:baleen_weather_app_test/logic/blocs/home/home_event.dart';
 import 'package:baleen_weather_app_test/logic/blocs/home/home_state.dart';
@@ -8,6 +9,7 @@ import 'package:baleen_weather_app_test/utils/weather_lottie_util.dart';
 import 'package:baleen_weather_app_test/widgets/current_forecast.dart';
 import 'package:baleen_weather_app_test/widgets/dialogs/city_not_found_dialog.dart';
 import 'package:baleen_weather_app_test/widgets/current_weather_display.dart';
+import 'package:baleen_weather_app_test/widgets/dialogs/location_disabled_dialog.dart';
 import 'package:baleen_weather_app_test/widgets/error_message_util.dart';
 import 'package:baleen_weather_app_test/widgets/five_day_forecast.dart';
 import 'package:baleen_weather_app_test/widgets/fullscreen_loading.dart';
@@ -35,6 +37,24 @@ class HomePage extends StatelessWidget {
               message: ErrorMessageUtil.getErrorMessage(state.errorWeatherResponse),
             ),
           );
+        }
+        if (state.isShowLocationErrorDialog) {
+          context.read<HomeBloc>().add(ShowLocationErrorDialogDone());
+          showDialog(
+            context: context,
+            builder: (_) => LocationDisabledDialog(
+              onOpenSettings: () {
+                AppSettings.openAppSettings(type: AppSettingsType.location);
+                Navigator.of(context).pop();
+              },
+              onDismiss: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          );
+        }
+        if (state.isGetCurrentLocationDone) {
+          context.read<HomeBloc>().add(GetCurrentLocationDone());
         }
       },
       child: BlocBuilder<HomeBloc, HomeState>(
