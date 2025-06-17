@@ -14,6 +14,7 @@ import 'package:baleen_weather_app_test/widgets/error_message_util.dart';
 import 'package:baleen_weather_app_test/widgets/five_day_forecast.dart';
 import 'package:baleen_weather_app_test/widgets/fullscreen_loading.dart';
 import 'package:baleen_weather_app_test/widgets/appbars/search_app_bar.dart';
+import 'package:baleen_weather_app_test/widgets/saved_weather_list.dart';
 import 'package:baleen_weather_app_test/widgets/search_tips.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -63,7 +64,7 @@ class HomePage extends StatelessWidget {
             children: [
               Scaffold(
                 appBar: _buildAppBar(context, state),
-                body: _buildBody(state),
+                body: _buildBody(context, state),
               ),
               if (state.isWeatherResponseLoading) const FullScreenLoading(),
             ],
@@ -82,10 +83,16 @@ class HomePage extends StatelessWidget {
       onSettingsTap: (){
         context.push('/setting');
       },
+      onSearchFocus: () {
+        context.read<HomeBloc>().add(SearchFocus());
+      },
+      onSearchUnfocus: () {
+        context.read<HomeBloc>().add(SearchUnFocus());
+      },
     );
   }
 
-  Widget _buildBody(HomeState state) {
+  Widget _buildBody(BuildContext context, HomeState state) {
     return SingleChildScrollView(
       child: Container(
         width: double.infinity,
@@ -94,15 +101,51 @@ class HomePage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             const SizedBox(height: 10),
-            _buildCurrentWeather(state),
-            const SizedBox(height: 10),
-            _buildCurrentForecast(state),
-            const SizedBox(height: 10),
-            _buildFiveDayForecast(state),
+            if (state.isSearchFocus)
+              _buildSavedForecast(context, state)
+            else
+              ..._buildWeatherContent(state),
           ],
         ),
       ),
     );
+  }
+
+  Widget _buildSavedForecast(BuildContext context, HomeState state) {
+    final weatherSavedList = state.savedWeatherResponses;
+
+    if (weatherSavedList == null) {
+      return Padding(
+        padding: const EdgeInsets.only(top: 200),
+        child: const Center(
+          child: SearchTips(),
+        ),
+      );
+    }
+
+    return SavedWeatherList(
+      savedWeatherResponse: weatherSavedList,
+      onTapItem: (item) {
+        context.read<HomeBloc>().add(SearchUnFocus());
+        context.read<HomeBloc>().add(ShowSelectedSavedWeather(savedWeatherResponse: item));
+      },
+      onReloadItem: (item) {
+        print("Reload");
+      },
+      onDeleteItem: (item) {
+        context.read<HomeBloc>().add(DeleteSavedWeather(savedWeatherResponse: item));
+      },
+    );
+  }
+
+  List<Widget> _buildWeatherContent(HomeState state) {
+    return [
+      _buildCurrentWeather(state),
+      const SizedBox(height: 10),
+      _buildCurrentForecast(state),
+      const SizedBox(height: 10),
+      _buildFiveDayForecast(state),
+    ];
   }
 
   Widget _buildCurrentWeather(HomeState state) {
@@ -123,6 +166,7 @@ class HomePage extends StatelessWidget {
       lottiePath: WeatherLottieUtil.getLottieAsset(currentWeather.weather?[0].id),
       temperature: TemperatureUtil.kelvinToCelsius(currentWeather.main?.temp),
       description: StringUtil.capitalize(currentWeather.weather?[0].description ?? "Unknown description"),
+      isCurrentLocation: state.weatherResponse?.isCurrentLocation ?? false,
     );
   }
 

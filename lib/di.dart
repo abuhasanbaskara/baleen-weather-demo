@@ -1,3 +1,4 @@
+import 'package:baleen_weather_app_test/data/repositories/hive_repository.dart';
 import 'package:baleen_weather_app_test/data/repositories/location_repository.dart';
 import 'package:baleen_weather_app_test/data/repositories/weather_repository.dart';
 import 'package:baleen_weather_app_test/logic/blocs/setting/setting_bloc.dart';
@@ -12,9 +13,11 @@ void setup() {
 
   getIt.registerLazySingleton<WeatherRepository>(() => WeatherRepository());
   getIt.registerLazySingleton<LocationRepository>(() => LocationRepository());
+  getIt.registerLazySingleton<HiveRepository>(() => HiveRepository());
   getIt.registerFactory<HomeBloc>(() =>
       HomeBloc(
         weatherRepository: getIt<WeatherRepository>(),
         locationRepository: getIt<LocationRepository>(),
+        hiveRepository: getIt<HiveRepository>(),
       ));
 }

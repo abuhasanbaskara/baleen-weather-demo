@@ -1,6 +1,5 @@
 import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:baleen_weather_app_test/l10n/app_localizations.dart';
-import 'package:baleen_weather_app_test/logic/blocs/home/home_event.dart';
 import 'package:baleen_weather_app_test/logic/blocs/setting/setting_bloc.dart';
 import 'package:baleen_weather_app_test/logic/blocs/setting/setting_event.dart';
 import 'package:baleen_weather_app_test/logic/blocs/setting/setting_state.dart';
@@ -10,7 +9,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'di.dart';
 import 'flavors.dart';
-import 'logic/blocs/home/home_bloc.dart';
 
 class MyApp extends StatelessWidget {
   final AdaptiveThemeMode? savedThemeMode;
@@ -36,9 +34,6 @@ class MyApp extends StatelessWidget {
           providers: [
             BlocProvider<SettingBloc>(
               create: (context) => getIt<SettingBloc>()..add(LoadLocale()),
-            ),
-            BlocProvider<HomeBloc>(
-              create: (context) => getIt<HomeBloc>()..add(GetCurrentLocation()),
             ),
           ],
           child: BlocBuilder<SettingBloc, SettingState>(

@@ -26,4 +26,24 @@ class WeatherRepository {
       throw errorMessage;
     }
   }
+
+  Future<WeatherResponse> getWeatherByLatLon(double lat, double lon) async {
+    try {
+      final response = await _apiClient.get(
+        'forecast',
+        queryParameters: {
+          'lat': lat,
+          'lon': lon,
+          'appid': F.appId,
+        },
+      );
+
+      return WeatherResponse.fromJson(response.data);
+    } on DioException catch (e, stackTrace) {
+      _logger.e(e);
+      _logger.e(stackTrace);
+      final errorMessage = e.response?.data['cod'] ?? 'Unknown error';
+      throw errorMessage;
+    }
+  }
 }

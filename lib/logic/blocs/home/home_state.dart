@@ -7,22 +7,23 @@ class HomeState extends Equatable {
   final String? errorWeatherResponse;
   final bool isCityNotFound;
 
-  final double? lat;
-  final double? lon;
   final bool isCurrentLocationLoading;
   final bool isShowLocationErrorDialog;
   final bool isGetCurrentLocationDone;
+
+  final bool isSearchFocus;
+  final List<WeatherResponse>? savedWeatherResponses;
 
   const HomeState({
     this.weatherResponse,
     this.isWeatherResponseLoading = false,
     this.errorWeatherResponse,
     this.isCityNotFound = false,
-    this.lat,
-    this.lon,
     this.isCurrentLocationLoading = false,
     this.isShowLocationErrorDialog = false,
     this.isGetCurrentLocationDone = false,
+    this.isSearchFocus = false,
+    this.savedWeatherResponses,
   });
 
   HomeState copyWith({
@@ -35,17 +36,19 @@ class HomeState extends Equatable {
     bool? isCurrentLocationLoading,
     bool? isShowLocationErrorDialog,
     bool? isGetCurrentLocationDone,
+    bool? isSearchFocus,
+    List<WeatherResponse>? savedWeatherResponses,
   }) {
     return HomeState(
       weatherResponse: weatherResponse ?? this.weatherResponse,
       isWeatherResponseLoading: isWeatherResponseLoading ?? this.isWeatherResponseLoading,
       errorWeatherResponse: errorWeatherResponse ?? this.errorWeatherResponse,
       isCityNotFound: isCityNotFound ?? this.isCityNotFound,
-      lat: lat ?? this.lat,
-      lon: lon ?? this.lon,
       isCurrentLocationLoading: isCurrentLocationLoading ?? this.isCurrentLocationLoading,
       isShowLocationErrorDialog: isShowLocationErrorDialog ?? this.isShowLocationErrorDialog,
       isGetCurrentLocationDone: isGetCurrentLocationDone ?? this.isGetCurrentLocationDone,
+      isSearchFocus: isSearchFocus ?? this.isSearchFocus,
+      savedWeatherResponses: savedWeatherResponses ?? this.savedWeatherResponses,
     );
   }
 
@@ -55,10 +58,10 @@ class HomeState extends Equatable {
     isWeatherResponseLoading,
     errorWeatherResponse,
     isCityNotFound,
-    lat,
-    lon,
     isCurrentLocationLoading,
     isShowLocationErrorDialog,
     isGetCurrentLocationDone,
+    isSearchFocus,
+    savedWeatherResponses,
   ];
 }

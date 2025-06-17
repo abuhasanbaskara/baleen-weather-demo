@@ -6,6 +6,7 @@ class CurrentWeatherDisplay extends StatelessWidget {
   final String lottiePath;       // e.g., Assets.rain
   final String temperature;      // e.g., "26°C"
   final String description;      // e.g., "Light rain"
+  final bool isCurrentLocation;
 
   const CurrentWeatherDisplay({
     super.key,
@@ -13,6 +14,7 @@ class CurrentWeatherDisplay extends StatelessWidget {
     required this.lottiePath,
     required this.temperature,
     required this.description,
+    required this.isCurrentLocation,
   });
 
   @override
@@ -20,6 +22,24 @@ class CurrentWeatherDisplay extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center, // Center horizontally
       children: [
+        if (isCurrentLocation) ...[
+          const SizedBox(height: 4),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(
+                Icons.my_location,
+                size: 20,
+              ),
+              const SizedBox(width: 4),
+              Text(
+                'My Location',
+                style: Theme.of(context).textTheme.bodyLarge,
+              ),
+            ],
+          ),
+        ],
+        const SizedBox(height: 8),
         Text(
           cityName,
           style: Theme.of(context).textTheme.displaySmall?.copyWith(fontWeight: FontWeight.bold),

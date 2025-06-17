@@ -59,14 +59,19 @@ dependencies:
   # Native Splash
   flutter_native_splash: ^2.4.6
 
-  #Adaptive for light and dark mode
+  # Adaptive for light and dark mode
   adaptive_theme: ^3.7.0
 
-  #Shared Pref
+  # Shared Pref
   shared_preferences: ^2.5.3
 
   #Geolocator for GPS
   geolocator: ^10.0.0
+
+  # Hive for saving data class to local
+  hive: ^2.2.3
+  hive_flutter: ^1.1.0
+  path_provider: ^2.1.1
 
   # Utils
   logger: ^1.1.0
@@ -75,6 +80,11 @@ dependencies:
   app_settings: ^5.1.1
 
 dev_dependencies:
+
+  #Hive
+  hive_generator: ^2.0.1
+  build_runner: ^2.4.6
+
   flutter_test:
     sdk: flutter
 

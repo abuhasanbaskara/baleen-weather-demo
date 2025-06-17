@@ -1,11 +1,28 @@
 import 'package:equatable/equatable.dart';
+import 'package:hive/hive.dart';
 
+part 'weather_response.g.dart';
+
+@HiveType(typeId: 0)
 class WeatherResponse extends Equatable {
+  @HiveField(0)
   final String? cod;
+
+  @HiveField(1)
   final int? message;
+
+  @HiveField(2)
   final int? cnt;
+
+  @HiveField(3)
   final List<WeatherData>? list;
+
+  @HiveField(4)
   final City? city;
+
+  //custom field
+  @HiveField(5)
+  final bool isCurrentLocation;
 
   const WeatherResponse({
     this.cod,
@@ -13,6 +30,7 @@ class WeatherResponse extends Equatable {
     this.cnt,
     this.list,
     this.city,
+    this.isCurrentLocation = false,
   });
 
   factory WeatherResponse.fromJson(Map<String, dynamic> json) {
@@ -27,20 +45,59 @@ class WeatherResponse extends Equatable {
     );
   }
 
+  // use copyWith to avoid error and safely input or edit data
+  WeatherResponse copyWith({
+    String? cod,
+    int? message,
+    int? cnt,
+    List<WeatherData>? list,
+    City? city,
+    bool? isCurrentLocation,
+  }) {
+    return WeatherResponse(
+      cod: cod ?? this.cod,
+      message: message ?? this.message,
+      cnt: cnt ?? this.cnt,
+      list: list ?? this.list,
+      city: city ?? this.city,
+      isCurrentLocation: isCurrentLocation ?? this.isCurrentLocation,
+    );
+  }
+
   @override
-  List<Object?> get props => [cod, message, cnt, list, city];
+  List<Object?> get props => [cod, message, cnt, list, city, isCurrentLocation];
 }
 
+@HiveType(typeId: 1)
 class WeatherData extends Equatable {
+  @HiveField(0)
   final int? dt;
+
+  @HiveField(1)
   final Main? main;
+
+  @HiveField(2)
   final List<Weather>? weather;
+
+  @HiveField(3)
   final Clouds? clouds;
+
+  @HiveField(4)
   final Wind? wind;
+
+  @HiveField(5)
   final int? visibility;
+
+  @HiveField(6)
   final double? pop;
+
+  @HiveField(7)
   final Rain? rain;
+
+  @HiveField(8)
   final Sys? sys;
+
+  @HiveField(9)
   final String? dtTxt;
 
   const WeatherData({
@@ -77,15 +134,33 @@ class WeatherData extends Equatable {
   List<Object?> get props => [dt, main, weather, clouds, wind, visibility, pop, rain, sys, dtTxt];
 }
 
+@HiveType(typeId: 2)
 class Main extends Equatable {
+  @HiveField(0)
   final double? temp;
+
+  @HiveField(1)
   final double? feelsLike;
+
+  @HiveField(2)
   final double? tempMin;
+
+  @HiveField(3)
   final double? tempMax;
+
+  @HiveField(4)
   final int? pressure;
+
+  @HiveField(5)
   final int? seaLevel;
+
+  @HiveField(6)
   final int? grndLevel;
+
+  @HiveField(7)
   final int? humidity;
+
+  @HiveField(8)
   final double? tempKf;
 
   const Main({
@@ -118,10 +193,18 @@ class Main extends Equatable {
   List<Object?> get props => [temp, feelsLike, tempMin, tempMax, pressure, seaLevel, grndLevel, humidity, tempKf];
 }
 
+@HiveType(typeId: 3)
 class Weather extends Equatable {
+  @HiveField(0)
   final int? id;
+
+  @HiveField(1)
   final String? main;
+
+  @HiveField(2)
   final String? description;
+
+  @HiveField(3)
   final String? icon;
 
   const Weather({
@@ -144,7 +227,9 @@ class Weather extends Equatable {
   List<Object?> get props => [id, main, description, icon];
 }
 
+@HiveType(typeId: 4)
 class Clouds extends Equatable {
+  @HiveField(0)
   final int? all;
 
   const Clouds({this.all});
@@ -159,9 +244,15 @@ class Clouds extends Equatable {
   List<Object?> get props => [all];
 }
 
+@HiveType(typeId: 5)
 class Wind extends Equatable {
+  @HiveField(0)
   final double? speed;
+
+  @HiveField(1)
   final int? deg;
+
+  @HiveField(2)
   final double? gust;
 
   const Wind({
@@ -182,7 +273,9 @@ class Wind extends Equatable {
   List<Object?> get props => [speed, deg, gust];
 }
 
+@HiveType(typeId: 6)
 class Rain extends Equatable {
+  @HiveField(0)
   final double? threeH;
 
   const Rain({this.threeH});
@@ -197,7 +290,9 @@ class Rain extends Equatable {
   List<Object?> get props => [threeH];
 }
 
+@HiveType(typeId: 7)
 class Sys extends Equatable {
+  @HiveField(0)
   final String? pod;
 
   const Sys({this.pod});
@@ -212,14 +307,30 @@ class Sys extends Equatable {
   List<Object?> get props => [pod];
 }
 
+@HiveType(typeId: 8)
 class City extends Equatable {
+  @HiveField(0)
   final int? id;
+
+  @HiveField(1)
   final String? name;
+
+  @HiveField(2)
   final Coord? coord;
+
+  @HiveField(3)
   final String? country;
+
+  @HiveField(4)
   final int? population;
+
+  @HiveField(5)
   final int? timezone;
+
+  @HiveField(6)
   final int? sunrise;
+
+  @HiveField(7)
   final int? sunset;
 
   const City({
@@ -250,8 +361,12 @@ class City extends Equatable {
   List<Object?> get props => [id, name, coord, country, population, timezone, sunrise, sunset];
 }
 
+@HiveType(typeId: 9)
 class Coord extends Equatable {
+  @HiveField(0)
   final double? lat;
+
+  @HiveField(1)
   final double? lon;
 
   const Coord({
