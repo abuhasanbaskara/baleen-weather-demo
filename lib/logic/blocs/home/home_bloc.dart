@@ -30,6 +30,8 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     on<DeleteSavedWeather>(_deleteSavedWeather);
     on<RefreshSavedWeather>(_refreshSavedWeather);
     on<ShowToastDone>(_showToastDone);
+    on<GetCurrentSavedInfo>(_getCurrentSavedInfo);
+    on<FirstCheck>(_firstCheck);
   }
 
   Future<void> _getWeatherByCityName(
@@ -78,31 +80,6 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     emit(state.copyWith(isError: false));
   }
 
-  Future<void> _getCurrentLocation(GetCurrentLocation event, Emitter<HomeState> emit) async {
-    emit(state.copyWith(isCurrentLocationLoading: true));
-
-    try {
-      final currentPosition = await locationRepository.getAllCurrentLocationInfo();
-      final latitude = currentPosition?.latitude;
-      final longitude = currentPosition?.longitude;
-
-      emit(state.copyWith(
-        isCurrentLocationLoading: false,
-        isGetCurrentLocationDone: true,
-      ));
-
-      if (latitude != null && longitude != null) {
-        add(GetWeatherByLatLon(lat: latitude, lon: longitude));
-      }
-    } catch (e) {
-      emit(state.copyWith(
-        isCurrentLocationLoading: false,
-        isShowLocationErrorDialog: true,
-        isGetCurrentLocationDone: false,
-      ));
-    }
-  }
-
   Future<void> _getWeatherByLatLon(
       GetWeatherByLatLon event,
       Emitter<HomeState> emit,
@@ -144,6 +121,53 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     }
   }
 
+  Future<void> _getCurrentLocation(GetCurrentLocation event, Emitter<HomeState> emit) async {
+    emit(state.copyWith(isCurrentLocationLoading: true));
+
+    try {
+      final currentPosition = await locationRepository.getAllCurrentLocationInfo();
+      final latitude = currentPosition?.latitude;
+      final longitude = currentPosition?.longitude;
+
+      emit(state.copyWith(
+        isCurrentLocationLoading: false,
+        isGetCurrentLocationDone: true,
+      ));
+
+      if (latitude != null && longitude != null) {
+        add(GetWeatherByLatLon(lat: latitude, lon: longitude));
+      }
+    } catch (e) {
+      emit(state.copyWith(
+        isCurrentLocationLoading: false,
+        isShowLocationErrorDialog: true,
+        isGetCurrentLocationDone: false,
+      ));
+    }
+  }
+
+  Future<void> _firstCheck(
+      FirstCheck event,
+      Emitter<HomeState> emit,
+      ) async {
+    emit(state.copyWith(
+      isWeatherResponseLoading: true,
+    ));
+
+    final hasConnection = await NetworkUtil.hasConnection();
+    if (!hasConnection) {
+      add(GetCurrentSavedInfo());
+      emit(state.copyWith(
+        isWeatherResponseLoading: false,
+      ));
+    } else {
+      add(GetCurrentLocation());
+      emit(state.copyWith(
+        isWeatherResponseLoading: false,
+      ));
+    }
+  }
+
   void _showLocationErrorDialogDone(ShowLocationErrorDialogDone event, Emitter<HomeState> emit) {
     emit(state.copyWith(isShowLocationErrorDialog: false));
   }
@@ -154,6 +178,20 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
   void _searchUnFocus(SearchUnFocus event, Emitter<HomeState> emit) {
     emit(state.copyWith(isSearchFocus: false));
+  }
+
+  Future<void> _getCurrentSavedInfo(GetCurrentSavedInfo event, Emitter<HomeState> emit) async {
+    try {
+      final savedWeatherResponses = await hiveRepository.getCurrentSavedInfo();
+
+      if (savedWeatherResponses != null) {
+        emit(state.copyWith(
+          weatherResponse: savedWeatherResponses,
+        ));
+      }
+    } catch (e) {
+      _logger.e(e);
+    }
   }
 
   Future<void> _callSavedWeather(CallSavedWeather event, Emitter<HomeState> emit) async {

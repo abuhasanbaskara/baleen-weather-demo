@@ -14,7 +14,7 @@ final GoRouter appRouter = GoRouter(
       builder: (context, state) {
         return BlocProvider<HomeBloc>(
           create: (context) => getIt<HomeBloc>()
-            ..add(GetCurrentLocation())
+            ..add(FirstCheck())
             ..add(CallSavedWeather()),
           child: HomePage(),
         );

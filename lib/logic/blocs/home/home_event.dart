@@ -33,6 +33,16 @@ class GetWeatherByLatLon extends HomeEvent {
   List<Object> get props => [lat, lon];
 }
 
+class FirstCheck extends HomeEvent {
+  @override
+  List<Object> get props => [];
+}
+
+class GetCurrentSavedInfo extends HomeEvent {
+  @override
+  List<Object> get props => [];
+}
+
 class GetCurrentLocation extends HomeEvent {
   @override
   List<Object> get props => [];

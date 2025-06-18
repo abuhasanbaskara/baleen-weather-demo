@@ -28,6 +28,10 @@ class HiveRepository {
     return weatherList;
   }
 
+  Future<WeatherResponse?> getCurrentSavedInfo() async {
+    return _weatherBox.get('currentLocation');
+  }
+
   Future<void> saveWeatherResponse(String key, WeatherResponse data) async {
     await _weatherBox.put(key, data);
   }

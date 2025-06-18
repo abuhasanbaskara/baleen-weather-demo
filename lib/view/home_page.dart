@@ -71,13 +71,13 @@ class HomePage extends StatelessWidget {
               Scaffold(
                 appBar: _buildAppBar(context, state),
                 body: _buildBody(context, state),
-                floatingActionButton: FloatingActionButton(
+                floatingActionButton: state.isSearchFocus == false ? FloatingActionButton(
                   onPressed: () {
                     context.read<HomeBloc>().add(GetCurrentLocation());
                   },
                   tooltip: 'Get Current Location',
                   child: const Icon(Icons.my_location),
-                ),
+                ): null,
               ),
               if (state.isWeatherResponseLoading) const FullScreenLoading(),
             ],
