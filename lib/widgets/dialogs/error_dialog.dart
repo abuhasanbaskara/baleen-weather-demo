@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-class CityNotFoundDialog extends StatelessWidget {
+class ErrorDialog extends StatelessWidget {
   final String title;
   final String message;
 
-  const CityNotFoundDialog({
+  const ErrorDialog({
     super.key,
     required this.title,
     required this.message,

@@ -43,11 +43,6 @@ class ShowLocationErrorDialogDone extends HomeEvent {
   List<Object> get props => [];
 }
 
-class GetCurrentLocationDone extends HomeEvent {
-  @override
-  List<Object> get props => [];
-}
-
 class SearchFocus extends HomeEvent {
   @override
   List<Object> get props => [];
@@ -88,4 +83,9 @@ class RefreshSavedWeather extends HomeEvent {
 
   @override
   List<Object> get props => [savedWeatherResponse];
+}
+
+class ShowToastDone extends HomeEvent {
+  @override
+  List<Object> get props => [];
 }

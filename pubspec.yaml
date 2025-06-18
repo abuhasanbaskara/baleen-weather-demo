@@ -79,6 +79,7 @@ dependencies:
   intl: ^0.20.2
   app_settings: ^5.1.1
   connectivity_plus: ^5.0.2
+  fluttertoast: ^8.2.1
 
 dev_dependencies:
 

@@ -22,7 +22,6 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     on<ConfirmedCityNotFound>(_confirmedCityNotFound);
     on<GetCurrentLocation>(_getCurrentLocation);
     on<ShowLocationErrorDialogDone>(_showLocationErrorDialogDone);
-    on<GetCurrentLocationDone>(_getCurrentLocationDone);
     on<GetWeatherByLatLon>(_getWeatherByLatLon);
     on<SearchFocus>(_searchFocus);
     on<SearchUnFocus>(_searchUnFocus);
@@ -30,6 +29,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     on<ShowSelectedSavedWeather>(_showSelectedSavedWeather);
     on<DeleteSavedWeather>(_deleteSavedWeather);
     on<RefreshSavedWeather>(_refreshSavedWeather);
+    on<ShowToastDone>(_showToastDone);
   }
 
   Future<void> _getWeatherByCityName(
@@ -38,15 +38,15 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       ) async {
     emit(state.copyWith(
       isWeatherResponseLoading: true,
-      errorWeatherResponse: null,
+      errorMessage: null,
     ));
 
     final hasConnection = await NetworkUtil.hasConnection();
     if (!hasConnection) {
       emit(state.copyWith(
         isWeatherResponseLoading: false,
-        errorWeatherResponse: "No internet connection",
-        isCityNotFound: true,
+        errorMessage: "No internet connection",
+        isError: true,
       ));
       return;
     }
@@ -68,14 +68,14 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     } catch (e) {
       emit(state.copyWith(
         isWeatherResponseLoading: false,
-        errorWeatherResponse: e.toString(),
-        isCityNotFound: true,
+        errorMessage: e.toString(),
+        isError: true,
       ));
     }
   }
 
   void _confirmedCityNotFound(ConfirmedCityNotFound event, Emitter<HomeState> emit) {
-    emit(state.copyWith(isCityNotFound: false));
+    emit(state.copyWith(isError: false));
   }
 
   Future<void> _getCurrentLocation(GetCurrentLocation event, Emitter<HomeState> emit) async {
@@ -109,15 +109,15 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       ) async {
     emit(state.copyWith(
       isWeatherResponseLoading: true,
-      errorWeatherResponse: null,
+      errorMessage: null,
     ));
 
     final hasConnection = await NetworkUtil.hasConnection();
     if (!hasConnection) {
       emit(state.copyWith(
         isWeatherResponseLoading: false,
-        errorWeatherResponse: "No internet connection",
-        isCityNotFound: true,
+        errorMessage: "No internet connection",
+        isError: true,
       ));
       return;
     }
@@ -138,18 +138,14 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     } catch (e) {
       emit(state.copyWith(
         isWeatherResponseLoading: false,
-        errorWeatherResponse: e.toString(),
-        isCityNotFound: true,
+        errorMessage: e.toString(),
+        isError: true,
       ));
     }
   }
 
   void _showLocationErrorDialogDone(ShowLocationErrorDialogDone event, Emitter<HomeState> emit) {
     emit(state.copyWith(isShowLocationErrorDialog: false));
-  }
-
-  void _getCurrentLocationDone(GetCurrentLocationDone event, Emitter<HomeState> emit) {
-    emit(state.copyWith(isGetCurrentLocationDone: false));
   }
 
   void _searchFocus(SearchFocus event, Emitter<HomeState> emit) {
@@ -196,15 +192,15 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       ) async {
     emit(state.copyWith(
       isWeatherResponseLoading: true,
-      errorWeatherResponse: null,
+      errorMessage: null,
     ));
 
     final hasConnection = await NetworkUtil.hasConnection();
     if (!hasConnection) {
       emit(state.copyWith(
         isWeatherResponseLoading: false,
-        errorWeatherResponse: "No internet connection",
-        isCityNotFound: true,
+        errorMessage: "No internet connection",
+        isError: true,
       ));
       return;
     }
@@ -224,13 +220,18 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         add(CallSavedWeather());
         emit(state.copyWith(
           isWeatherResponseLoading: false,
+          isShowToast: true,
         ));
       }
     } catch (e) {
       emit(state.copyWith(
         isWeatherResponseLoading: false,
-        isCityNotFound: true,
+        isError: true,
       ));
     }
+  }
+
+  void _showToastDone(ShowToastDone event, Emitter<HomeState> emit) {
+    emit(state.copyWith(isShowToast: false));
   }
 }

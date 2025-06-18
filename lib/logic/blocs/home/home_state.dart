@@ -4,33 +4,33 @@ import 'package:equatable/equatable.dart';
 class HomeState extends Equatable {
   final WeatherResponse? weatherResponse;
   final bool isWeatherResponseLoading;
-  final String? errorWeatherResponse;
-  final bool isCityNotFound;
+  final String? errorMessage;
+  final bool isError;
 
   final bool isCurrentLocationLoading;
   final bool isShowLocationErrorDialog;
-  final bool isGetCurrentLocationDone;
 
   final bool isSearchFocus;
   final List<WeatherResponse>? savedWeatherResponses;
+  final bool isShowToast;
 
   const HomeState({
     this.weatherResponse,
     this.isWeatherResponseLoading = false,
-    this.errorWeatherResponse,
-    this.isCityNotFound = false,
+    this.errorMessage,
+    this.isError = false,
     this.isCurrentLocationLoading = false,
     this.isShowLocationErrorDialog = false,
-    this.isGetCurrentLocationDone = false,
     this.isSearchFocus = false,
     this.savedWeatherResponses,
+    this.isShowToast = false,
   });
 
   HomeState copyWith({
     WeatherResponse? weatherResponse,
     bool? isWeatherResponseLoading,
-    String? errorWeatherResponse,
-    bool? isCityNotFound,
+    String? errorMessage,
+    bool? isError,
     double? lat,
     double? lon,
     bool? isCurrentLocationLoading,
@@ -38,17 +38,18 @@ class HomeState extends Equatable {
     bool? isGetCurrentLocationDone,
     bool? isSearchFocus,
     List<WeatherResponse>? savedWeatherResponses,
+    bool? isShowToast,
   }) {
     return HomeState(
       weatherResponse: weatherResponse ?? this.weatherResponse,
       isWeatherResponseLoading: isWeatherResponseLoading ?? this.isWeatherResponseLoading,
-      errorWeatherResponse: errorWeatherResponse ?? this.errorWeatherResponse,
-      isCityNotFound: isCityNotFound ?? this.isCityNotFound,
+      errorMessage: errorMessage ?? this.errorMessage,
+      isError: isError ?? this.isError,
       isCurrentLocationLoading: isCurrentLocationLoading ?? this.isCurrentLocationLoading,
       isShowLocationErrorDialog: isShowLocationErrorDialog ?? this.isShowLocationErrorDialog,
-      isGetCurrentLocationDone: isGetCurrentLocationDone ?? this.isGetCurrentLocationDone,
       isSearchFocus: isSearchFocus ?? this.isSearchFocus,
       savedWeatherResponses: savedWeatherResponses ?? this.savedWeatherResponses,
+      isShowToast: isShowToast ?? this.isShowToast,
     );
   }
 
@@ -56,12 +57,12 @@ class HomeState extends Equatable {
   List<Object?> get props => [
     weatherResponse,
     isWeatherResponseLoading,
-    errorWeatherResponse,
-    isCityNotFound,
+    errorMessage,
+    isError,
     isCurrentLocationLoading,
     isShowLocationErrorDialog,
-    isGetCurrentLocationDone,
     isSearchFocus,
     savedWeatherResponses,
+    isShowToast,
   ];
 }

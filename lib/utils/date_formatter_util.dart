@@ -6,7 +6,7 @@ class DateFormatterUtil {
     if (dtTxt == null) return "-";
     try {
       final dateTime = DateTime.parse(dtTxt).toLocal();
-      final formatter = DateFormat("MMMM d, y 'at' HH:mm");
+      final formatter = DateFormat("MMMM d, y 'at' HH:mm 'Locale Time'");
       return formatter.format(dateTime);
     } catch (e) {
       return "-";

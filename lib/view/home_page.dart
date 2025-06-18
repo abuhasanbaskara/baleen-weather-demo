@@ -7,7 +7,7 @@ import 'package:baleen_weather_app_test/utils/string_util.dart';
 import 'package:baleen_weather_app_test/utils/temperature_util.dart';
 import 'package:baleen_weather_app_test/utils/weather_lottie_util.dart';
 import 'package:baleen_weather_app_test/widgets/current_forecast.dart';
-import 'package:baleen_weather_app_test/widgets/dialogs/city_not_found_dialog.dart';
+import 'package:baleen_weather_app_test/widgets/dialogs/error_dialog.dart';
 import 'package:baleen_weather_app_test/widgets/current_weather_display.dart';
 import 'package:baleen_weather_app_test/widgets/dialogs/location_disabled_dialog.dart';
 import 'package:baleen_weather_app_test/widgets/error_message_util.dart';
@@ -18,6 +18,7 @@ import 'package:baleen_weather_app_test/widgets/saved_weather_list.dart';
 import 'package:baleen_weather_app_test/widgets/search_tips.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:go_router/go_router.dart';
 
 class HomePage extends StatelessWidget {
@@ -29,13 +30,13 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocListener<HomeBloc, HomeState>(
       listener: (context, state) {
-        if (state.isCityNotFound) {
+        if (state.isError) {
           context.read<HomeBloc>().add(ConfirmedCityNotFound());
           showDialog(
             context: context,
-            builder: (context) => CityNotFoundDialog(
-              title: ErrorMessageUtil.getErrorTitle(state.errorWeatherResponse),
-              message: ErrorMessageUtil.getErrorMessage(state.errorWeatherResponse),
+            builder: (context) => ErrorDialog(
+              title: ErrorMessageUtil.getErrorTitle(state.errorMessage),
+              message: ErrorMessageUtil.getErrorMessage(state.errorMessage),
             ),
           );
         }
@@ -54,8 +55,13 @@ class HomePage extends StatelessWidget {
             ),
           );
         }
-        if (state.isGetCurrentLocationDone) {
-          context.read<HomeBloc>().add(GetCurrentLocationDone());
+        if (state.isShowToast) {
+          context.read<HomeBloc>().add(ShowToastDone());
+          Fluttertoast.showToast(
+            msg: "Refresh Success!",
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.BOTTOM,
+          );
         }
       },
       child: BlocBuilder<HomeBloc, HomeState>(
