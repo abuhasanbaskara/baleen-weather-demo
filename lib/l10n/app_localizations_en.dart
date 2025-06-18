@@ -34,4 +34,58 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get japanese => 'Japanese';
+
+  @override
+  String get refreshSuccess => 'Refresh Success';
+
+  @override
+  String get understood => 'Understood';
+
+  @override
+  String get locationDisabled => 'Location is disabled';
+
+  @override
+  String get pleaseEnableLocation => 'Please enable location services in settings to use this feature';
+
+  @override
+  String get later => 'Later';
+
+  @override
+  String get now => 'Now';
+
+  @override
+  String get myLocation => 'My Location';
+
+  @override
+  String get unauthorized => 'Unauthorized';
+
+  @override
+  String get cityNotFound => 'City Not Found';
+
+  @override
+  String get internalServerError => 'Internal Server Error';
+
+  @override
+  String get noInternet => 'No Internet Connection';
+
+  @override
+  String get somethingWrong => 'Something went wrong';
+
+  @override
+  String get pleaseCheckApi => 'Please check your API key or login credentials';
+
+  @override
+  String get tryUsingSimpler => 'Try using a simpler city name (ex: Tokyo)';
+
+  @override
+  String get pleaseTryAgain => 'Please try again later';
+
+  @override
+  String get pleaseCheckInternet => 'Please check your internet connection';
+
+  @override
+  String get searchTips => 'Please search city first to show the weather forecast\n(ex: Tokyo)';
+
+  @override
+  String get localTime => 'Local Time';
 }

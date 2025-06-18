@@ -1,32 +1,35 @@
+import 'package:baleen_weather_app_test/l10n/app_localizations.dart';
+import 'package:flutter/cupertino.dart';
+
 class ErrorMessageUtil {
 
-  static String getErrorTitle(String? code) {
+  static String getErrorTitle(String? code, BuildContext context) {
     switch (code) {
       case '401':
-        return 'Unauthorized';
+        return AppLocalizations.of(context)!.unauthorized;
       case '404':
-        return 'City Not Found';
+        return AppLocalizations.of(context)!.cityNotFound;
       case '500':
-        return 'Internal Server Error';
+        return AppLocalizations.of(context)!.internalServerError;
       case 'No internet connection':
-        return 'No internet connection';
+        return AppLocalizations.of(context)!.noInternet;
       default:
-        return 'Something went wrong';
+        return AppLocalizations.of(context)!.somethingWrong;
     }
   }
 
-  static String getErrorMessage(String? code) {
+  static String getErrorMessage(String? code, BuildContext context) {
     switch (code) {
       case '401':
-        return 'Please check your API key or login credentials.';
+        return AppLocalizations.of(context)!.pleaseCheckApi;
       case '404':
-        return 'Try using a simpler city name (ex: Tokyo)';
+        return AppLocalizations.of(context)!.tryUsingSimpler;
       case '500':
-        return 'Please try again later.';
+        return AppLocalizations.of(context)!.pleaseTryAgain;
       case 'No internet connection':
-        return 'Please check your internet connection';
+        return AppLocalizations.of(context)!.pleaseCheckInternet;
       default:
-        return 'Please try again.';
+        return AppLocalizations.of(context)!.pleaseTryAgain;
     }
   }
 }

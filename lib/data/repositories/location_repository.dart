@@ -1,4 +1,5 @@
 import 'package:baleen_weather_app_test/services/location_service.dart';
+import 'package:baleen_weather_app_test/utils/app_strings.dart';
 import 'package:flutter/foundation.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:logger/logger.dart';
@@ -13,10 +14,10 @@ class LocationRepository {
       return position;
     } catch (e) {
       if (kDebugMode) {
-        _logger.e('Error getting location: $e');
+        _logger.e("${AppStrings.errorGettingLocation} $e");
       }
 
-      if (e.toString().contains('denied') || e.toString().contains('disabled')) {
+      if (e.toString().contains(AppStrings.denied) || e.toString().contains(AppStrings.disabled)) {
         rethrow;
       }
       return null;
@@ -29,7 +30,7 @@ class LocationRepository {
       return position?.latitude.toString();
     } catch (e) {
       if (kDebugMode) {
-        _logger.e('Error getting latitude: $e');
+        _logger.e("${AppStrings.errorGettingLatitude} $e");
       }
       return null;
     }
@@ -41,7 +42,7 @@ class LocationRepository {
       return position?.longitude.toString();
     } catch (e) {
       if (kDebugMode) {
-        print('Error getting longitude: $e');
+        print("${AppStrings.errorGettingLongitude} $e");
       }
       return null;
     }
@@ -53,10 +54,10 @@ class LocationRepository {
       return position;
     } catch (e) {
       if (kDebugMode) {
-        print('Error getting All Current Location Info: $e');
+        print("${AppStrings.errorGettingAllCurrentLocation} $e");
       }
 
-      if (e.toString().contains('denied') || e.toString().contains('disabled')) {
+      if (e.toString().contains(AppStrings.denied) || e.toString().contains(AppStrings.disabled)) {
         rethrow;
       }
 

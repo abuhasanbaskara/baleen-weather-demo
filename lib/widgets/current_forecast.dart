@@ -1,4 +1,5 @@
 import 'package:baleen_weather_app_test/data/models/weather_response.dart';
+import 'package:baleen_weather_app_test/l10n/app_localizations.dart';
 import 'package:baleen_weather_app_test/utils/date_formatter_util.dart';
 import 'package:baleen_weather_app_test/utils/temperature_util.dart';
 import 'package:baleen_weather_app_test/utils/weather_icon_util.dart';
@@ -25,7 +26,7 @@ class CurrentForecast extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            DateFormatterUtil.formatFull(forecasts[0].dtTxt),
+            DateFormatterUtil.formatFull(forecasts[0].dtTxt, context),
             style: Theme.of(context).textTheme.bodyLarge,
           ),
           const Divider(),
@@ -39,7 +40,7 @@ class CurrentForecast extends StatelessWidget {
                 final item = forecasts[index];
                 final isNow = index == 0;
                 final dateLabel = isNow
-                    ? "Now"
+                    ? AppLocalizations.of(context)!.now
                     : DateFormatterUtil.formatHourOnly(item.dtTxt);
 
                 return Column(

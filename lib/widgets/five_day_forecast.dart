@@ -1,5 +1,6 @@
 import 'package:baleen_weather_app_test/data/models/weather_response.dart';
 import 'package:baleen_weather_app_test/l10n/app_localizations.dart';
+import 'package:baleen_weather_app_test/utils/app_strings.dart';
 import 'package:baleen_weather_app_test/utils/date_formatter_util.dart';
 import 'package:baleen_weather_app_test/utils/string_util.dart';
 import 'package:baleen_weather_app_test/utils/temperature_util.dart';
@@ -60,7 +61,7 @@ class FiveDayForecast extends StatelessWidget {
                     Expanded(
                         flex: 4,
                         child: Text(
-                          StringUtil.capitalize(item.weather?[0].description ?? "Unknown description"),
+                          StringUtil.capitalize(item.weather?[0].description ?? AppStrings.unknownDescription),
                           style: Theme.of(context).textTheme.bodyMedium,
                         )
                     ),

@@ -1,4 +1,6 @@
 import 'package:baleen_weather_app_test/data/models/weather_response.dart';
+import 'package:baleen_weather_app_test/utils/app_strings.dart';
+import 'package:baleen_weather_app_test/utils/date_formatter_util.dart';
 import 'package:baleen_weather_app_test/utils/string_util.dart';
 import 'package:baleen_weather_app_test/utils/temperature_util.dart';
 import 'package:baleen_weather_app_test/utils/weather_icon_util.dart';
@@ -43,6 +45,12 @@ class SavedWeatherList extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      Text(
+                        DateFormatterUtil.formatSimple(item.list?[0].dtTxt),
+                        style: Theme.of(context).textTheme.bodyMedium,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                      const SizedBox(height: 4),
                       Row(
                         children: [
                           if (item.isCurrentLocation == true)
@@ -105,12 +113,12 @@ class SavedWeatherList extends StatelessWidget {
                   children: [
                     IconButton(
                       icon: const Icon(Icons.refresh),
-                      tooltip: "Reload",
+                      tooltip: AppStrings.reload,
                       onPressed: () => onReloadItem(item),
                     ),
                     IconButton(
                       icon: const Icon(Icons.delete),
-                      tooltip: "Delete",
+                      tooltip: AppStrings.delete,
                       onPressed: () => onDeleteItem(item),
                     ),
                   ],

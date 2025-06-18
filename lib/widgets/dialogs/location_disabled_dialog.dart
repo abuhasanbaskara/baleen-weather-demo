@@ -1,3 +1,4 @@
+import 'package:baleen_weather_app_test/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 
 class LocationDisabledDialog extends StatelessWidget {
@@ -19,18 +20,18 @@ class LocationDisabledDialog extends StatelessWidget {
       backgroundColor: colorScheme.surface,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       title: Text(
-        'Location is disabled',
+        AppLocalizations.of(context)!.locationDisabled,
         style: theme.textTheme.titleLarge,
       ),
       content: Text(
-        'Please enable location services in settings to use this feature.',
+        AppLocalizations.of(context)!.pleaseEnableLocation,
         style: theme.textTheme.bodyMedium,
       ),
       actions: [
         TextButton(
           onPressed: onDismiss,
           child: Text(
-            'Later',
+            AppLocalizations.of(context)!.later,
             style: TextStyle(color: colorScheme.primary),
           ),
         ),
@@ -40,7 +41,7 @@ class LocationDisabledDialog extends StatelessWidget {
             foregroundColor: colorScheme.onPrimary,
           ),
           onPressed: onOpenSettings,
-          child: const Text('Settings'),
+          child: Text(AppLocalizations.of(context)!.settings),
         ),
       ],
     );

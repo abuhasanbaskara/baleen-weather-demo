@@ -4,6 +4,7 @@ import 'package:baleen_weather_app_test/logic/blocs/setting/setting_bloc.dart';
 import 'package:baleen_weather_app_test/logic/blocs/setting/setting_event.dart';
 import 'package:baleen_weather_app_test/logic/blocs/setting/setting_state.dart';
 import 'package:baleen_weather_app_test/router/app_router.dart';
+import 'package:baleen_weather_app_test/utils/app_strings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -39,7 +40,7 @@ class MyApp extends StatelessWidget {
           child: BlocBuilder<SettingBloc, SettingState>(
             builder: (context, localeState) {
               return MaterialApp.router(
-                locale: Locale(localeState.locale ?? "en"),
+                locale: Locale(localeState.locale ?? AppStrings.en),
                 routerConfig: appRouter,
                 title: F.title,
                 debugShowCheckedModeBanner: true,

@@ -1,3 +1,4 @@
+import 'package:baleen_weather_app_test/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 
 class ErrorDialog extends StatelessWidget {
@@ -36,7 +37,7 @@ class ErrorDialog extends StatelessWidget {
         TextButton(
           onPressed: () => Navigator.of(context).pop(),
           child: Text(
-            'Got it!',
+            AppLocalizations.of(context)!.understood,
             style: TextStyle(color: theme.colorScheme.primary),
           ),
         ),

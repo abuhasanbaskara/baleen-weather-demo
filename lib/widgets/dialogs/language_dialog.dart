@@ -1,3 +1,4 @@
+import 'package:baleen_weather_app_test/utils/app_strings.dart';
 import 'package:flutter/material.dart';
 import 'package:baleen_weather_app_test/l10n/app_localizations.dart';
 
@@ -23,7 +24,7 @@ class LanguageDialog extends StatelessWidget {
           ListTile(
             title: Text(AppLocalizations.of(context)!.english),
             onTap: () {
-              onLanguageSelected("en");
+              onLanguageSelected(AppStrings.en);
               Navigator.of(context).pop();
             },
           ),
@@ -31,7 +32,7 @@ class LanguageDialog extends StatelessWidget {
           ListTile(
             title: Text(AppLocalizations.of(context)!.japanese),
             onTap: () {
-              onLanguageSelected("ja");
+              onLanguageSelected(AppStrings.ja);
               Navigator.of(context).pop();
             },
           ),

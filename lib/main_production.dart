@@ -1,5 +1,6 @@
 import 'package:baleen_weather_app_test/data/models/weather_response.dart';
 import 'package:baleen_weather_app_test/flavors.dart';
+import 'package:baleen_weather_app_test/utils/app_strings.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'di.dart';
@@ -22,7 +23,7 @@ void main() async {
   Hive.registerAdapter(SysAdapter());
   Hive.registerAdapter(CityAdapter());
   Hive.registerAdapter(CoordAdapter());
-  await Hive.openBox<WeatherResponse>('weatherBox');
+  await Hive.openBox<WeatherResponse>(AppStrings.hiveBoxKey);
 
   runApp(const MyApp());
 }

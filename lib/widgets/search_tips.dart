@@ -1,3 +1,4 @@
+import 'package:baleen_weather_app_test/l10n/app_localizations.dart';
 import 'package:baleen_weather_app_test/utils/assets.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
@@ -21,7 +22,7 @@ class SearchTips extends StatelessWidget {
           ),
           const SizedBox(height: 16),
           Text(
-            'Please search city first to show the weather forecast\n(ex: Tokyo)',
+            AppLocalizations.of(context)!.searchTips,
             textAlign: TextAlign.center,
             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
               color: textColor,

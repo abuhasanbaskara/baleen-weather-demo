@@ -1,7 +1,9 @@
 import 'package:app_settings/app_settings.dart';
+import 'package:baleen_weather_app_test/l10n/app_localizations.dart';
 import 'package:baleen_weather_app_test/logic/blocs/home/home_bloc.dart';
 import 'package:baleen_weather_app_test/logic/blocs/home/home_event.dart';
 import 'package:baleen_weather_app_test/logic/blocs/home/home_state.dart';
+import 'package:baleen_weather_app_test/utils/app_strings.dart';
 import 'package:baleen_weather_app_test/utils/forecast_filter_util.dart';
 import 'package:baleen_weather_app_test/utils/string_util.dart';
 import 'package:baleen_weather_app_test/utils/temperature_util.dart';
@@ -35,8 +37,8 @@ class HomePage extends StatelessWidget {
           showDialog(
             context: context,
             builder: (context) => ErrorDialog(
-              title: ErrorMessageUtil.getErrorTitle(state.errorMessage),
-              message: ErrorMessageUtil.getErrorMessage(state.errorMessage),
+              title: ErrorMessageUtil.getErrorTitle(state.errorMessage, context),
+              message: ErrorMessageUtil.getErrorMessage(state.errorMessage, context),
             ),
           );
         }
@@ -58,7 +60,7 @@ class HomePage extends StatelessWidget {
         if (state.isShowToast) {
           context.read<HomeBloc>().add(ShowToastDone());
           Fluttertoast.showToast(
-            msg: "Refresh Success!",
+            msg: AppLocalizations.of(context)!.refreshSuccess,
             toastLength: Toast.LENGTH_SHORT,
             gravity: ToastGravity.BOTTOM,
           );
@@ -75,7 +77,7 @@ class HomePage extends StatelessWidget {
                   onPressed: () {
                     context.read<HomeBloc>().add(GetCurrentLocation());
                   },
-                  tooltip: 'Get Current Location',
+                  tooltip: AppStrings.getCurrentLocation,
                   child: const Icon(Icons.my_location),
                 ): null,
               ),
@@ -179,7 +181,7 @@ class HomePage extends StatelessWidget {
       cityName: "${state.weatherResponse?.city?.name}, ${state.weatherResponse?.city?.country}",
       lottiePath: WeatherLottieUtil.getLottieAsset(currentWeather.weather?[0].id),
       temperature: TemperatureUtil.kelvinToCelsius(currentWeather.main?.temp),
-      description: StringUtil.capitalize(currentWeather.weather?[0].description ?? "Unknown description"),
+      description: StringUtil.capitalize(currentWeather.weather?[0].description ?? AppStrings.unknownDescription),
       isCurrentLocation: state.weatherResponse?.isCurrentLocation ?? false,
     );
   }

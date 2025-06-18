@@ -3,6 +3,7 @@ import 'package:baleen_weather_app_test/data/repositories/location_repository.da
 import 'package:baleen_weather_app_test/data/repositories/weather_repository.dart';
 import 'package:baleen_weather_app_test/logic/blocs/home/home_event.dart';
 import 'package:baleen_weather_app_test/logic/blocs/home/home_state.dart';
+import 'package:baleen_weather_app_test/utils/app_strings.dart';
 import 'package:baleen_weather_app_test/widgets/network_util.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:logger/logger.dart';
@@ -47,7 +48,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     if (!hasConnection) {
       emit(state.copyWith(
         isWeatherResponseLoading: false,
-        errorMessage: "No internet connection",
+        errorMessage: AppStrings.noInternetConnection,
         isError: true,
       ));
       return;
@@ -93,7 +94,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     if (!hasConnection) {
       emit(state.copyWith(
         isWeatherResponseLoading: false,
-        errorMessage: "No internet connection",
+        errorMessage: AppStrings.noInternetConnection,
         isError: true,
       ));
       return;
@@ -104,7 +105,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       final updated = response.copyWith(isCurrentLocation: true);
 
       if (response.cod == "200") {
-        hiveRepository.saveWeatherResponse("currentLocation", updated);
+        hiveRepository.saveWeatherResponse(AppStrings.hiveCurrentLocation, updated);
         add(CallSavedWeather());
 
         emit(state.copyWith(
@@ -197,7 +198,6 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   Future<void> _callSavedWeather(CallSavedWeather event, Emitter<HomeState> emit) async {
     try {
       final savedWeatherResponses = await hiveRepository.getSavedWeatherResponses();
-
       emit(state.copyWith(
         savedWeatherResponses: savedWeatherResponses,
       ));
@@ -213,7 +213,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   Future<void> _deleteSavedWeather(DeleteSavedWeather event, Emitter<HomeState> emit) async {
     try {
       if (event.savedWeatherResponse.isCurrentLocation) {
-        await hiveRepository.deleteWeatherResponse("currentLocation");
+        await hiveRepository.deleteWeatherResponse(AppStrings.hiveCurrentLocation);
       } else {
         await hiveRepository.deleteWeatherResponse(event.savedWeatherResponse.city?.name ?? "");
       }
@@ -237,7 +237,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     if (!hasConnection) {
       emit(state.copyWith(
         isWeatherResponseLoading: false,
-        errorMessage: "No internet connection",
+        errorMessage: AppStrings.noInternetConnection,
         isError: true,
       ));
       return;
@@ -250,7 +250,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
         if (event.savedWeatherResponse.isCurrentLocation) {
           final updated = response.copyWith(isCurrentLocation: true);
-          hiveRepository.saveWeatherResponse("currentLocation", updated);
+          hiveRepository.saveWeatherResponse(AppStrings.hiveCurrentLocation, updated);
         } else if (response.city?.name != null){
           hiveRepository.saveWeatherResponse(response.city!.name!, response);
         }

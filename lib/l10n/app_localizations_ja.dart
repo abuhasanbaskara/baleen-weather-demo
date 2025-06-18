@@ -12,7 +12,7 @@ class AppLocalizationsJa extends AppLocalizations {
   String get settings => '設定';
 
   @override
-  String get changeLanguage => '言語を変更する';
+  String get changeLanguage => '言語を変更';
 
   @override
   String get theme => 'テーマ';
@@ -34,4 +34,58 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get japanese => '日本語';
+
+  @override
+  String get refreshSuccess => '更新に成功しました';
+
+  @override
+  String get understood => '了解しました';
+
+  @override
+  String get locationDisabled => '位置情報が無効です';
+
+  @override
+  String get pleaseEnableLocation => 'この機能を使用するには、設定で位置情報サービスを有効にしてください';
+
+  @override
+  String get later => '後で';
+
+  @override
+  String get now => '今すぐ';
+
+  @override
+  String get myLocation => '現在地';
+
+  @override
+  String get unauthorized => '認証されていません';
+
+  @override
+  String get cityNotFound => '都市が見つかりません';
+
+  @override
+  String get internalServerError => 'サーバー内部エラー';
+
+  @override
+  String get noInternet => 'インターネット接続がありません';
+
+  @override
+  String get somethingWrong => '問題が発生しました';
+
+  @override
+  String get pleaseCheckApi => 'APIキーまたはログイン情報を確認してください';
+
+  @override
+  String get tryUsingSimpler => 'より簡単な都市名を試してください（例：東京）';
+
+  @override
+  String get pleaseTryAgain => '後で再試行してください';
+
+  @override
+  String get pleaseCheckInternet => 'インターネット接続を確認してください';
+
+  @override
+  String get searchTips => '最初に都市を検索して天気予報を表示してください\n（例：東京）';
+
+  @override
+  String get localTime => '現地時間';
 }

@@ -148,6 +148,114 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Japanese'**
   String get japanese;
+
+  /// No description provided for @refreshSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Refresh Success'**
+  String get refreshSuccess;
+
+  /// No description provided for @understood.
+  ///
+  /// In en, this message translates to:
+  /// **'Understood'**
+  String get understood;
+
+  /// No description provided for @locationDisabled.
+  ///
+  /// In en, this message translates to:
+  /// **'Location is disabled'**
+  String get locationDisabled;
+
+  /// No description provided for @pleaseEnableLocation.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enable location services in settings to use this feature'**
+  String get pleaseEnableLocation;
+
+  /// No description provided for @later.
+  ///
+  /// In en, this message translates to:
+  /// **'Later'**
+  String get later;
+
+  /// No description provided for @now.
+  ///
+  /// In en, this message translates to:
+  /// **'Now'**
+  String get now;
+
+  /// No description provided for @myLocation.
+  ///
+  /// In en, this message translates to:
+  /// **'My Location'**
+  String get myLocation;
+
+  /// No description provided for @unauthorized.
+  ///
+  /// In en, this message translates to:
+  /// **'Unauthorized'**
+  String get unauthorized;
+
+  /// No description provided for @cityNotFound.
+  ///
+  /// In en, this message translates to:
+  /// **'City Not Found'**
+  String get cityNotFound;
+
+  /// No description provided for @internalServerError.
+  ///
+  /// In en, this message translates to:
+  /// **'Internal Server Error'**
+  String get internalServerError;
+
+  /// No description provided for @noInternet.
+  ///
+  /// In en, this message translates to:
+  /// **'No Internet Connection'**
+  String get noInternet;
+
+  /// No description provided for @somethingWrong.
+  ///
+  /// In en, this message translates to:
+  /// **'Something went wrong'**
+  String get somethingWrong;
+
+  /// No description provided for @pleaseCheckApi.
+  ///
+  /// In en, this message translates to:
+  /// **'Please check your API key or login credentials'**
+  String get pleaseCheckApi;
+
+  /// No description provided for @tryUsingSimpler.
+  ///
+  /// In en, this message translates to:
+  /// **'Try using a simpler city name (ex: Tokyo)'**
+  String get tryUsingSimpler;
+
+  /// No description provided for @pleaseTryAgain.
+  ///
+  /// In en, this message translates to:
+  /// **'Please try again later'**
+  String get pleaseTryAgain;
+
+  /// No description provided for @pleaseCheckInternet.
+  ///
+  /// In en, this message translates to:
+  /// **'Please check your internet connection'**
+  String get pleaseCheckInternet;
+
+  /// No description provided for @searchTips.
+  ///
+  /// In en, this message translates to:
+  /// **'Please search city first to show the weather forecast\n(ex: Tokyo)'**
+  String get searchTips;
+
+  /// No description provided for @localTime.
+  ///
+  /// In en, this message translates to:
+  /// **'Local Time'**
+  String get localTime;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

@@ -17,8 +17,8 @@ class SettingsMenu extends StatelessWidget {
     final isDark = AdaptiveTheme.of(context).mode.isDark;
 
     return Container(
-      margin: const EdgeInsets.fromLTRB(16, 16, 16, 16), // reduced bottom margin
-      padding: const EdgeInsets.only(top: 8), // only top padding
+      margin: const EdgeInsets.fromLTRB(16, 16, 16, 16),
+      padding: const EdgeInsets.only(top: 8),
       decoration: BoxDecoration(
         color: colorScheme.surface,
         borderRadius: BorderRadius.circular(8),

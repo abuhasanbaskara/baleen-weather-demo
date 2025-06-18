@@ -1,3 +1,4 @@
+import 'package:baleen_weather_app_test/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
@@ -33,7 +34,7 @@ class CurrentWeatherDisplay extends StatelessWidget {
               ),
               const SizedBox(width: 4),
               Text(
-                'My Location',
+                AppLocalizations.of(context)!.myLocation,
                 style: Theme.of(context).textTheme.bodyLarge,
               ),
             ],
