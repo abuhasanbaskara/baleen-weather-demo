@@ -1,4 +1,5 @@
 import 'package:app_settings/app_settings.dart';
+import 'package:baleen_weather_app_test/data/models/weather_response.dart';
 import 'package:baleen_weather_app_test/l10n/app_localizations.dart';
 import 'package:baleen_weather_app_test/logic/blocs/home/home_bloc.dart';
 import 'package:baleen_weather_app_test/logic/blocs/home/home_event.dart';
@@ -18,6 +19,7 @@ import 'package:baleen_weather_app_test/widgets/fullscreen_loading.dart';
 import 'package:baleen_weather_app_test/widgets/appbars/search_app_bar.dart';
 import 'package:baleen_weather_app_test/widgets/saved_weather_list.dart';
 import 'package:baleen_weather_app_test/widgets/search_tips.dart';
+import 'package:baleen_weather_app_test/widgets/weather_detail_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -120,7 +122,7 @@ class HomePage extends StatelessWidget {
             if (state.isSearchFocus)
               _buildSavedForecast(context, state)
             else
-              ..._buildWeatherContent(state),
+              ..._buildWeatherContent(context, state),
           ],
         ),
       ),
@@ -154,13 +156,13 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  List<Widget> _buildWeatherContent(HomeState state) {
+  List<Widget> _buildWeatherContent(BuildContext context, HomeState state) {
     return [
       _buildCurrentWeather(state),
       const SizedBox(height: 10),
-      _buildCurrentForecast(state),
+      _buildCurrentForecast(context, state),
       const SizedBox(height: 10),
-      _buildFiveDayForecast(state),
+      _buildFiveDayForecast(context, state),
     ];
   }
 
@@ -186,7 +188,7 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  Widget _buildCurrentForecast(HomeState state) {
+  Widget _buildCurrentForecast(BuildContext context, HomeState state) {
     final weatherList = state.weatherResponse?.list;
 
     if (weatherList == null || weatherList.isEmpty) {
@@ -197,10 +199,13 @@ class HomePage extends StatelessWidget {
 
     return CurrentForecast(
       forecasts: filteredList,
+      onItemTap: (weatherData) {
+        _showWeatherDetail(context, weatherData);
+      },
     );
   }
 
-  Widget _buildFiveDayForecast(HomeState state) {
+  Widget _buildFiveDayForecast(BuildContext context, HomeState state) {
     final weatherList = state.weatherResponse?.list;
 
     if (weatherList == null || weatherList.isEmpty) {
@@ -211,6 +216,20 @@ class HomePage extends StatelessWidget {
 
     return FiveDayForecast(
       forecasts: filteredList,
+      onItemTap: (weatherData) {
+        _showWeatherDetail(context, weatherData);
+      },
+    );
+  }
+
+  void _showWeatherDetail(BuildContext context, WeatherData data) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      builder: (context) {
+        return WeatherDetailSheet(weather: data);
+      },
     );
   }
 

@@ -256,6 +256,84 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Local Time'**
   String get localTime;
+
+  /// No description provided for @temperature.
+  ///
+  /// In en, this message translates to:
+  /// **'Temperature'**
+  String get temperature;
+
+  /// No description provided for @feelsLike.
+  ///
+  /// In en, this message translates to:
+  /// **'Feels Like'**
+  String get feelsLike;
+
+  /// No description provided for @minTemp.
+  ///
+  /// In en, this message translates to:
+  /// **'Min Temp'**
+  String get minTemp;
+
+  /// No description provided for @maxTemp.
+  ///
+  /// In en, this message translates to:
+  /// **'Max Temp'**
+  String get maxTemp;
+
+  /// No description provided for @humidity.
+  ///
+  /// In en, this message translates to:
+  /// **'Humidity'**
+  String get humidity;
+
+  /// No description provided for @pressure.
+  ///
+  /// In en, this message translates to:
+  /// **'Pressure'**
+  String get pressure;
+
+  /// No description provided for @seaLevel.
+  ///
+  /// In en, this message translates to:
+  /// **'Sea Level'**
+  String get seaLevel;
+
+  /// No description provided for @groundLevel.
+  ///
+  /// In en, this message translates to:
+  /// **'Ground Level'**
+  String get groundLevel;
+
+  /// No description provided for @clouds.
+  ///
+  /// In en, this message translates to:
+  /// **'Clouds'**
+  String get clouds;
+
+  /// No description provided for @visibility.
+  ///
+  /// In en, this message translates to:
+  /// **'Visibility'**
+  String get visibility;
+
+  /// No description provided for @windSpeed.
+  ///
+  /// In en, this message translates to:
+  /// **'Wind Speed'**
+  String get windSpeed;
+
+  /// No description provided for @windDirection.
+  ///
+  /// In en, this message translates to:
+  /// **'Wind Direction'**
+  String get windDirection;
+
+  /// No description provided for @windGust.
+  ///
+  /// In en, this message translates to:
+  /// **'Wind Gust'**
+  String get windGust;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

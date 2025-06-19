@@ -10,8 +10,13 @@ import 'package:flutter/material.dart';
 
 class FiveDayForecast extends StatelessWidget {
   final List<WeatherData> forecasts;
+  final ValueChanged<WeatherData>? onItemTap;
 
-  const FiveDayForecast({super.key, required this.forecasts});
+  const FiveDayForecast({
+    super.key,
+    required this.forecasts,
+    this.onItemTap,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +26,7 @@ class FiveDayForecast extends StatelessWidget {
         color: Theme.of(context).colorScheme.surface,
         borderRadius: BorderRadius.circular(8),
         border: Border.all(
-          color: Theme.of(context).colorScheme.outline.withValues(alpha : 0.2),
+          color: Theme.of(context).colorScheme.outline.withValues(alpha: 0.2),
         ),
       ),
       child: Column(
@@ -33,42 +38,47 @@ class FiveDayForecast extends StatelessWidget {
           ),
           const Divider(),
           ...forecasts.map((item) {
-            return Column(
-              children: [
-                Row(
-                  children: [
-                    Expanded(
+            return GestureDetector(
+              onTap: () => onItemTap?.call(item),
+              child: Column(
+                children: [
+                  Row(
+                    children: [
+                      Expanded(
                         flex: 3,
                         child: Text(
                           DateFormatterUtil.formatSimple(item.dtTxt),
                           style: Theme.of(context).textTheme.bodyMedium,
-                        )
-                    ),
-                    CachedNetworkImage(
-                      imageUrl: WeatherIconUtil.getIconUrl(item.weather?[0].icon),
-                      placeholder: (context, url) =>
-                      const CircularProgressIndicator(),
-                      errorWidget: (context, url, error) => const Icon(Icons.error),
-                      fadeInDuration: const Duration(seconds: 3),
-                    ),
-                    Expanded(
+                        ),
+                      ),
+                      CachedNetworkImage(
+                        imageUrl: WeatherIconUtil.getIconUrl(item.weather?[0].icon),
+                        placeholder: (context, url) =>
+                        const CircularProgressIndicator(),
+                        errorWidget: (context, url, error) => const Icon(Icons.error),
+                        fadeInDuration: const Duration(seconds: 3),
+                      ),
+                      Expanded(
                         flex: 2,
                         child: Text(
                           TemperatureUtil.kelvinToCelsius(item.main?.temp),
                           style: Theme.of(context).textTheme.bodyMedium,
-                        )
-                    ),
-                    Expanded(
+                        ),
+                      ),
+                      Expanded(
                         flex: 4,
                         child: Text(
-                          StringUtil.capitalize(item.weather?[0].description ?? AppStrings.unknownDescription),
+                          StringUtil.capitalize(
+                            item.weather?[0].description ?? AppStrings.unknownDescription,
+                          ),
                           style: Theme.of(context).textTheme.bodyMedium,
-                        )
-                    ),
-                  ],
-                ),
-                const Divider(),
-              ],
+                        ),
+                      ),
+                    ],
+                  ),
+                  const Divider(),
+                ],
+              ),
             );
           }),
         ],

@@ -8,8 +8,13 @@ import 'package:flutter/material.dart';
 
 class CurrentForecast extends StatelessWidget {
   final List<WeatherData> forecasts;
+  final ValueChanged<WeatherData>? onItemTap;
 
-  const CurrentForecast({super.key, required this.forecasts});
+  const CurrentForecast({
+    super.key,
+    required this.forecasts,
+    this.onItemTap,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +24,7 @@ class CurrentForecast extends StatelessWidget {
         color: Theme.of(context).colorScheme.surface,
         borderRadius: BorderRadius.circular(8),
         border: Border.all(
-          color: Theme.of(context).colorScheme.outline.withValues(alpha: 0.2),
+          color: Theme.of(context).colorScheme.outline.withAlpha(51),
         ),
       ),
       child: Column(
@@ -43,27 +48,37 @@ class CurrentForecast extends StatelessWidget {
                     ? AppLocalizations.of(context)!.now
                     : DateFormatterUtil.formatHourOnly(item.dtTxt);
 
-                return Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      dateLabel,
-                      style: Theme.of(context).textTheme.bodySmall,
-                    ),
-                    const SizedBox(height: 8),
-                    CachedNetworkImage(
-                      imageUrl: WeatherIconUtil.getIconUrlSmall(item.weather?[0].icon),
-                      placeholder: (context, url) =>
-                      const CircularProgressIndicator(),
-                      errorWidget: (context, url, error) => const Icon(Icons.error),
-                      fadeInDuration: const Duration(seconds: 3),
-                    ),
-                    const SizedBox(height: 8),
-                    Text(
-                      TemperatureUtil.kelvinToCelsius(item.main?.temp),
-                      style: Theme.of(context).textTheme.bodySmall,
-                    ),
-                  ],
+                return GestureDetector(
+                  onTap: () {
+                    if (onItemTap != null) {
+                      onItemTap!(item);
+                    }
+                  },
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        dateLabel,
+                        style: Theme.of(context).textTheme.bodySmall,
+                      ),
+                      const SizedBox(height: 8),
+                      CachedNetworkImage(
+                        imageUrl: WeatherIconUtil.getIconUrlSmall(item.weather?[0].icon),
+                        placeholder: (context, url) =>
+                        const CircularProgressIndicator(),
+                        errorWidget: (context, url, error) =>
+                        const Icon(Icons.error),
+                        width: 40,
+                        height: 40,
+                        fadeInDuration: const Duration(seconds: 1),
+                      ),
+                      const SizedBox(height: 8),
+                      Text(
+                        TemperatureUtil.kelvinToCelsius(item.main?.temp),
+                        style: Theme.of(context).textTheme.bodySmall,
+                      ),
+                    ],
+                  ),
                 );
               },
             ),

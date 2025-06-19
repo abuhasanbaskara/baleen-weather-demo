@@ -26,5 +26,18 @@
   "pleaseTryAgain": "後で再試行してください",
   "pleaseCheckInternet": "インターネット接続を確認してください",
   "searchTips": "最初に都市を検索して天気予報を表示してください\n（例：東京）",
-  "localTime": "現地時間"
+  "localTime": "現地時間",
+  "temperature": "気温",
+  "feelsLike": "体感温度",
+  "minTemp": "最低気温",
+  "maxTemp": "最高気温",
+  "humidity": "湿度",
+  "pressure": "気圧",
+  "seaLevel": "海面気圧",
+  "groundLevel": "地上気圧",
+  "clouds": "雲量",
+  "visibility": "視程",
+  "windSpeed": "風速",
+  "windDirection": "風向",
+  "windGust": "突風"
 }

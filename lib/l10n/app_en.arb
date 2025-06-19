@@ -26,5 +26,18 @@
   "pleaseTryAgain": "Please try again later",
   "pleaseCheckInternet": "Please check your internet connection",
   "searchTips": "Please search city first to show the weather forecast\n(ex: Tokyo)",
-  "localTime": "Local Time"
+  "localTime": "Local Time",
+  "temperature": "Temperature",
+  "feelsLike": "Feels Like",
+  "minTemp": "Min Temp",
+  "maxTemp": "Max Temp",
+  "humidity": "Humidity",
+  "pressure": "Pressure",
+  "seaLevel": "Sea Level",
+  "groundLevel": "Ground Level",
+  "clouds": "Clouds",
+  "visibility": "Visibility",
+  "windSpeed": "Wind Speed",
+  "windDirection": "Wind Direction",
+  "windGust": "Wind Gust"
 }

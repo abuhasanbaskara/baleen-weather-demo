@@ -88,4 +88,43 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get localTime => '現地時間';
+
+  @override
+  String get temperature => '気温';
+
+  @override
+  String get feelsLike => '体感温度';
+
+  @override
+  String get minTemp => '最低気温';
+
+  @override
+  String get maxTemp => '最高気温';
+
+  @override
+  String get humidity => '湿度';
+
+  @override
+  String get pressure => '気圧';
+
+  @override
+  String get seaLevel => '海面気圧';
+
+  @override
+  String get groundLevel => '地上気圧';
+
+  @override
+  String get clouds => '雲量';
+
+  @override
+  String get visibility => '視程';
+
+  @override
+  String get windSpeed => '風速';
+
+  @override
+  String get windDirection => '風向';
+
+  @override
+  String get windGust => '突風';
 }

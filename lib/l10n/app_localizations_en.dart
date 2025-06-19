@@ -88,4 +88,43 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get localTime => 'Local Time';
+
+  @override
+  String get temperature => 'Temperature';
+
+  @override
+  String get feelsLike => 'Feels Like';
+
+  @override
+  String get minTemp => 'Min Temp';
+
+  @override
+  String get maxTemp => 'Max Temp';
+
+  @override
+  String get humidity => 'Humidity';
+
+  @override
+  String get pressure => 'Pressure';
+
+  @override
+  String get seaLevel => 'Sea Level';
+
+  @override
+  String get groundLevel => 'Ground Level';
+
+  @override
+  String get clouds => 'Clouds';
+
+  @override
+  String get visibility => 'Visibility';
+
+  @override
+  String get windSpeed => 'Wind Speed';
+
+  @override
+  String get windDirection => 'Wind Direction';
+
+  @override
+  String get windGust => 'Wind Gust';
 }
